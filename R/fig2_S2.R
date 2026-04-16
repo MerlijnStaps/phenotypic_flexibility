@@ -11,8 +11,12 @@ d$strategy = sapply(1:nrow(d),function(i){
 d$strategy[d$fitness < 0.5*d$yA] = "always A" 
 d$strategy[d$fitness < 0.5*d$yB] = "always B" 
 
-d$B = d$yA
-d$C = d$yB
+rename <- function(par){
+  if(par == "pAA"){return("pA")}
+  if(par == "pAB"){return("qA")}
+  if(par == "pBA"){return("qB")}
+  if(par == "pBB"){return("pB")}
+}
 
 bc_threshold <- function(alpha,gamma,lambda){
   I = (1/(alpha*gamma+1))^(1/gamma)
@@ -22,9 +26,8 @@ bc_threshold <- function(alpha,gamma,lambda){
 
 pdf("plots/fig_2.pdf",width=4,height=4)
 for(e in 1:3){
-  c = 0
-  f = subset(d,d$env == e & d$sensing_cost == c)
-  example_environment_plot(f,strategy_colors[f$strategy])
+  f = subset(d,d$env == e & d$sensing_cost == 0)
+  example_environment_plot(f,strategy_colors[f$strategy],main=paste("Environment",paste(rep("I",e),collapse=""),sep=" "))
   y = seq(0,6,0.01)
   z = sapply(y, function(alpha){bc_threshold(alpha,c(1,2,0.5)[e],1)})
   y = y[log2(z-1) <= 2.5]
@@ -36,10 +39,9 @@ dev.off()
 
 pdf("plots/fig_S2.pdf",width=4,height=4)
 for(e in 1:3){
-  c = 0
-  f = subset(d,d$env == e & d$sensing_cost == c)
+  f = subset(d,d$env == e & d$sensing_cost == 0)
   for(par in c("pAA","pAB","pBA","pBB")){
-  example_environment_plot(f,intensityColor(f[,par],min=0,max=1),main=par)
+    example_environment_plot(f,intensityColor(f[,par],min=0,max=1),main=paste(c("Environment ",paste(rep("I",e),collapse="")," ",rename(par)),collapse=""))
   }
 }
 dev.off()

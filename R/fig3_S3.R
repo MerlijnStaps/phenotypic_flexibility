@@ -27,7 +27,12 @@ pdf("plots/fig_3_S3.pdf",width=5,height=5)
 par(pty="s")
 for(bc in c(0.25,1,4)){
   for(a in alphas){
-    plot(0,0,type="n",xlim=c(-2,4),ylim=c(-2,4),bty="n",xlab="gamma_A",ylab="gamma_B",main=paste(bc,a,sep=" "))
+    plot(0,0,type="n",xlim=c(-2,4),ylim=c(-2,4),bty="n",xaxt="n",yaxt="n",
+         xlab=expression(paste("CV(",tau,"A)")),
+         ylab=expression(paste("CV(",tau,"B)")),
+         main=paste(c("yA / yB = ",bc,", alpha = ",a),collapse=""))
+    axis(side=1,at=seq(-2,4,2),labels=c(0.5,1,2,4),tck=-0.025)
+    axis(side=2,at=seq(-2,4,2),labels=c(0.5,1,2,4),tck=-0.025,las=2)
     f = subset(d,d$yA == bc & d$alpha == a)
     x = log2(f$gammaA)
     y = log2(f$gammaB)
