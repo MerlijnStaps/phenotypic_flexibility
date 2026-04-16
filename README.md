@@ -1,9 +1,6 @@
 # Phenotypic flexibility
 
-[![DOI](https://zenodo.org/badge/657317785.svg)](https://zenodo.org/doi/10.5281/zenodo.12795781)
-
 Model for phenotypic flexibility in which durations of conditions are gamma distributed.
-
 
 ## System requirements
 
