@@ -9,11 +9,11 @@ The code was produced on Julia v1.11.1.
 Module uses the following packages:
 
 ```console
-StatsBase
-Distributions
-DataFrames
-CSV
-ArgParse
+StatsBase v0.34.3
+Distributions v0.25.109
+DataFrames v.1.6.1
+CSV v.0.10.14
+ArgParse v.1.2.0
 ```
 
 ## Simulations
