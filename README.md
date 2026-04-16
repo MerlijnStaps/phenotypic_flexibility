@@ -2,11 +2,9 @@
 
 Model for phenotypic flexibility in which durations of conditions are gamma distributed.
 
-## System requirements
+## Dependencies
 
-The code was produced on Julia v1.11.1. 
-
-Module uses the following packages:
+The code was produced on Julia v1.11.1, using the following packages:
 
 ```console
 StatsBase v0.34.3
