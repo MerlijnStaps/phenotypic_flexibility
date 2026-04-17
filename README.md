@@ -1,6 +1,6 @@
 # Phenotypic flexibility
 
-Model for phenotypic flexibility in which durations of conditions are gamma distributed.
+Model for phenotypic flexibility in a discrete environment with gamma-distributed durations of conditions
 
 ## Dependencies
 
