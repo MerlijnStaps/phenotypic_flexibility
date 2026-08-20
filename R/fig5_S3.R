@@ -1,0 +1,54 @@
+source("R/plotting.R")
+
+d = read.table(gzfile("results/evo2_results.csv.gz"),header=T,stringsAsFactors=F,sep=",")
+d = d[d$replicate %in% 1:5,]
+d$id = as.integer(interaction(d$alpha, d$yA, d$gammaA, d$gammaB, drop = TRUE))
+
+d = d[order(d$id, -d$fitness), ] # order by unique ID, then fitness
+d = d[!duplicated(d$id),] # only keep the rows with highest fitness
+
+d = d[d$gammaA <= 16 & d$gammaB <= 16,]
+d$strategy = sapply(1:nrow(d),function(i){
+  call_strategy(d$pAA[i], d$pAB[i], d$pBA[i], d$pBB[i])
+})
+d$strategy[d$fitness <= 0.5*d$yA] = "always A" 
+d$strategy[d$fitness <= 0.5*d$yB] = "always B" 
+
+alphas = sort(unique(d$alpha))
+
+gammaB_threshold <- function(bc, alpha, gammaA, lambda){
+  G <- function(x){
+    IA = (1/(alpha*gammaA+1))^(1/(gammaA*lambda))
+    IB = (1/(alpha*x+1))^(1/(x*lambda))
+    PA = 1/(1-IA)
+    PB = 1/(1-IB)
+    return((alpha/lambda)*(PA+PB-1)-(1+bc))
+  }
+  if(G(0.001)*G(1000) < 0){
+    return(uniroot(G,c(0.001,1000))$root)
+  }
+  return(NA)
+}
+
+pdf("plots/fig_5_S3.pdf",width=4,height=4)
+par(pty="s")
+for(bc in c(0.25,1,4)){
+  for(a in alphas){
+    plot(0,0,type="n",xlim=c(-2,4),ylim=c(-2,4),bty="n",xaxt="n",yaxt="n",
+         xlab=expression(paste("CV(",tau,"A)")),
+         ylab=expression(paste("CV(",tau,"B)")),
+         main=paste(c("yA / yB = ",bc,", alpha = ",a),collapse=""))
+    axis(side=1,at=seq(-2,4,2),labels=c(0.5,1,2,4),tck=-0.025)
+    axis(side=2,at=seq(-2,4,2),labels=c(0.5,1,2,4),tck=-0.025,las=2)
+    f = subset(d,d$yA == bc & d$alpha == a)
+    x = log2(f$gammaA)
+    y = log2(f$gammaB)
+    rect(x-0.05,y-0.05,x+0.05,y+0.05,border=NA,col=strategy_colors[f$strategy])
+    gammaA = 2**seq(-2,4,0.01)
+    gammaB = sapply(gammaA, function(x){gammaB_threshold(max(bc,1/bc),a,x,1)})
+    gammaA = gammaA[gammaB > 0.25]
+    gammaB = gammaB[gammaB > 0.25]
+    points(log2(gammaA),log2(gammaB),type="l",lwd=2,lty=3)
+  }
+}
+dev.off()
