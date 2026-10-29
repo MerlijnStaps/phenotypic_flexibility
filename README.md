@@ -12,7 +12,13 @@ This repository includes code to run the various evolutionary simulations and re
 
 ## Dependencies
 
-The code was produced on Julia v1.11.1, using the following packages:
+The code was produced on Julia v1.11.1, 
+
+The R code to produce the figures
+
+## Simulations
+
+The simulation code was produced on Julia v1.11.1, using the following packages:
 
 ```console
 StatsBase v0.34.3
@@ -22,8 +28,6 @@ CSV v.0.10.14
 ArgParse v.1.2.0
 ```
 
-## Simulations
-
 The code for the simulations can be found in `flexibility.jl`. 
 
 The script `setup.jl` creates CSV files with parameter settings for the simulations, which are stored in the folder `sims`.
@@ -31,11 +35,17 @@ The script `setup.jl` creates CSV files with parameter settings for the simulati
 The script `run.jl` can be used to run simulations as follows:
 
 ```console
-$ julia run.jl fig2 100 123
+$ julia run.jl evo1 100 123
 ```
 
-This will run simulations with parameters from lines 100 through 123 from `sims/fig2.csv`.
+This will run simulations with parameters from lines 100 through 123 from `sims/evo1.csv`.
 
 ## Figures
 
-The outputs of the simulations can be found in the folder `results`. The R scripts to generate the figures can be found in the folder `R`. 
+The outputs of the simulations can be found in the folder `results`. 
+
+The code to produce the figures was written in R (v4.3.2). The R scripts to generate the figures can be found in the folder `R`. The only dependency is:
+
+```console
+RColorBrewer 1.1.3
+```
