@@ -10,22 +10,12 @@ Abstract: "Flexibility, also called reversible plasticity, is a ubiquitous respo
 
 This repository includes code to run the various evolutionary simulations and recreate the figures from the paper. 
 
-## Dependencies
-
-The code was produced on Julia v1.11.1, 
-
-The R code to produce the figures
-
 ## Simulations
 
-The simulation code was produced on Julia v1.11.1, using the following packages:
+The simulation code was produced on Julia v1.11.1. The dependencies can be found in ``Project.toml`` and installed using 
 
 ```console
-StatsBase v0.34.3
-Distributions v0.25.109
-DataFrames v.1.6.1
-CSV v.0.10.14
-ArgParse v.1.2.0
+julia --project=. -e 'using Pkg; Pkg.instantiate()'
 ```
 
 The code for the simulations can be found in `flexibility.jl`. 
@@ -35,10 +25,10 @@ The script `setup.jl` creates CSV files with parameter settings for the simulati
 The script `run.jl` can be used to run simulations as follows:
 
 ```console
-$ julia run.jl evo1 100 123
+$ julia --project=. run.jl evo1 100 123
 ```
 
-This will run simulations with parameters from lines 100 through 123 from `sims/evo1.csv`.
+This will run simulations with parameters from lines 100 through 123 from `sims/evo1.csv`, and store the outputs in the folder `results/evo1`. 
 
 ## Figures
 

@@ -37,5 +37,6 @@ for i in 1:nrow(d)
     d.fitness[i] = sim["winner_fitness"]
 end
 
+mkpath("results/"*name)
 CSV.write("results/"*name*"/"*name*"_"*string(line1)*"_"*string(line2)*".csv",d)
 
