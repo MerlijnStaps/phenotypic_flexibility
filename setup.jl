@@ -4,7 +4,7 @@ using DataFrames
 using CSV
 using Random
 
-# Evolutionary simulations for Environments I, II, III
+# Evolutionary simulations for Environments I, II, III (Fig. 4 and S1)
 
 env = [1,2,3]
 alpha = collect(0.05:0.05:8)
@@ -26,7 +26,7 @@ Random.seed!(123)
 d = d[shuffle(1:nrow(d)), :]
 CSV.write("sims/evo1.csv",d)
 
-# Evolutionary simulations with arbitrary environments
+# Evolutionary simulations with arbitrary environments (Fig. 5 and S3)
 
 gammaA = 2.0.^collect(-2:0.1:6)
 gammaB = 2.0.^collect(-2:0.1:6)
@@ -45,7 +45,7 @@ d.generations = [1001 for _ in 1:nrow(d)]
 d.s = [5.0 for _ in 1:nrow(d)]
 CSV.write("sims/evo2.csv",d)
 
-# Evolutionary simulations with evolvable sensing
+# Evolutionary simulations with evolvable sensing (Fig. S4 and S5)
 
 gammaA = 2.0.^collect(-2:0.1:6)
 gammaB = 2.0.^collect(-2:0.1:6)
@@ -65,7 +65,7 @@ d.s = [5.0 for _ in 1:nrow(d)]
 CSV.write("sims/evo3.csv",d)
 
 
-# Evolutionary simulations with robustness checks
+# Evolutionary simulations with robustness checks (Fig. S2)
 
 env = [1,2,3]
 alpha = [2,3,4]

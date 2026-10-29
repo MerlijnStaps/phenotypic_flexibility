@@ -20,7 +20,7 @@ $ julia --project=. -e 'using Pkg; Pkg.instantiate()'
 
 The code for the simulations can be found in `flexibility.jl`. 
 
-The script `setup.jl` creates CSV files with parameter settings for the simulations, which are stored in the folder `sims`.
+The script `setup.jl` creates CSV files with parameter settings for the simulations, which are stored in the folder `sims`. 
 
 The script `run.jl` can be used to run simulations as follows:
 
@@ -28,14 +28,10 @@ The script `run.jl` can be used to run simulations as follows:
 $ julia --project=. run.jl evo1 100 123
 ```
 
-This will run simulations with parameters from lines 100 through 123 from `sims/evo1.csv`, and store the outputs in the folder `results/evo1`. 
+This will run simulations with parameters from lines 100 through 123 from `sims/evo1.csv`, and store the outputs in the folder `results/evo1`. It will also output the winning strategy found in the simulation and its fitness.
 
 ## Figures
 
 The outputs of the simulations can be found in the folder `results`. 
 
-The code to produce the figures was written in R (v4.3.2). The R scripts to generate the figures can be found in the folder `R`. The only dependency is:
-
-```console
-RColorBrewer 1.1.3
-```
+The code to produce the figures was written in R (v4.3.2). The R scripts to generate the figures can be found in the folder `R`. The only dependency is RColorBrewer (version 1.1.3).
