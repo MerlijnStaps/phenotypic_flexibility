@@ -84,8 +84,6 @@ end
 
 function evolutionarySimulation(environment, parameters, simulationParameters, alphaAEvolvable = "no", alphaBEvolvable = "no")
     n = simulationParameters["populationSize"]
-    #outcomes = []
-    #for _ in 1:simulationParameters["replicates"]
     population = [Strategy(rand(),rand(),rand(),rand(),parameters["alpha"],parameters["alpha"]) for _ in 1:n]
     g = simulationParameters["generations"]
     for t in 1:g
@@ -96,10 +94,6 @@ function evolutionarySimulation(environment, parameters, simulationParameters, a
         weights = map(x -> exp(log(10.0) * parameters["s"] * x/(parameters["yA"]+parameters["yB"])), fitnesses)
         population = [deepcopy(sample(population,StatsBase.Weights(weights))) for i in 1:n]
     end
-    #outcomes = [outcomes; population]
-    #end
-    #fitnesses = [calculateFitness(environment, s, parameters) for s in outcomes]
-    #winner = outcomes[findmax(fitnesses)[2]]
     fitnesses = [calculateFitness(environment, s, parameters) for s in population]
     winner = population[findmax(fitnesses)[2]]
     return(Dict("population" => population, "winner" => winner, "fitnesses" => fitnesses, "winner_fitness" => findmax(fitnesses)[1]))
