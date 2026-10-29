@@ -15,7 +15,7 @@ This repository includes code to run the various evolutionary simulations and re
 The simulation code was produced on Julia v1.11.1. The dependencies can be found in ``Project.toml`` and installed using 
 
 ```console
-julia --project=. -e 'using Pkg; Pkg.instantiate()'
+$ julia --project=. -e 'using Pkg; Pkg.instantiate()'
 ```
 
 The code for the simulations can be found in `flexibility.jl`. 
