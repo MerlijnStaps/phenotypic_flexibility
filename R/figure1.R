@@ -1,0 +1,15 @@
+source("R/plotting.R")
+
+pdf("plots/fig_1a.pdf",width=4,height=3.5)
+plot(0,0,type="n",xlim=c(0,4),ylim=c(0,1.5),bty="l",xaxt="n",yaxt="n",xlab="",ylab="")
+x = seq(0,5,0.01)
+y = 0.5*dgamma(x, shape=1/0.5, rate = 1/0.5) + 1*dgamma(x, shape=1/0.1, rate=0.6/0.1)
+polygon(c(x,rev(x)),c(y,rep(0,length(x))),col=add.alpha(environment_colors["A"],0.5),border=NA)
+points(x,y,type="l",lwd=3,col=environment_colors["A"])
+
+plot(0,0,type="n",xlim=c(0,4),ylim=c(0,1.5),bty="l",xaxt="n",yaxt="n",xlab="",ylab="")
+x = seq(0,5,0.01)
+y = 1*dgamma(x, shape=1/0.5, rate = 1/0.5) + 0.5*dgamma(x, shape=1/0.05, rate=0.4/0.05)
+polygon(c(x,rev(x)),c(y,rep(0,length(x))),col=add.alpha(environment_colors["B"],0.5),border=NA)
+points(x,y,type="l",lwd=3,col=environment_colors["B"])
+dev.off()
