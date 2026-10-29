@@ -28,7 +28,7 @@ The script `run.jl` can be used to run simulations as follows:
 $ julia --project=. run.jl evo1 100 123
 ```
 
-This will run simulations with parameters from lines 100 through 123 from `sims/evo1.csv`, and store the outputs in the folder `results/evo1`. It will also output the winning strategy found in the simulation and its fitness.
+This will run simulations with parameters from lines 100 through 123 from `sims/evo1.csv` (be sure to unzip the file first), and store the outputs in the folder `results/evo1`. It will also output the winning strategy found in the simulation and its fitness.
 
 ## Figures
 
