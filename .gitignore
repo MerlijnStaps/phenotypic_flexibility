@@ -4,4 +4,4 @@
 .Ruserdata
 *DS_Store
 *.py
-
+sims/*csv
