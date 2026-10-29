@@ -1,4 +1,5 @@
 source("R/plotting.R")
+source("R/functions.R")
 
 d = read.table(gzfile("results/evo2_results.csv.gz"),header=T,stringsAsFactors=F,sep=",")
 d = d[d$replicate %in% 1:5,]
